@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: paytrack-redis
+  name: paytrack-redis
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: paytrack-redis
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: paytrack-redis
+    spec:
+      containers:
+      - image: redis:7-alpine
+        name: redis
+        ports:
+        - containerPort: 6379
+        volumeMounts:
+        - name: redisdata
+          mountPath: /data
+        resources: 
+          requests:
+            memory: "128Mi"
+            cpu: "500m"
+          limits:
+            memory: "512Mi"
+            cpu: "1000m"
+      volumes:
+      - name: redisdata
+volumeClaimTemplates:
+- metadata:
+    name: redisdata
+spec:
+  accessModes: [ "ReadWriteOnce" ]
+  resources:
+    requests:
+      storage: 1Gi
+

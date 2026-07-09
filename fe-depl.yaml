@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: paytrack-fe
+  name: paytrack-fe
+  namespace: paytrack
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: paytrack-fe
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: paytrack-fe
+    spec:
+      containers:
+      - image: boluex/paytrack-frontend:7.0
+        name: paytrack-frontend
+        ports:
+        - containerPort: 5173
+        resources: 
+          requests:
+            memory: "128Mi"
+            cpu: "500m"
+          limits:
+            memory: "512Mi"
+            cpu: "1000m"
+         

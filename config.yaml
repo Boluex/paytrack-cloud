@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: paytrack-config
+  namespace: paytrack
+stringData:
+  DATABASE_URL: postgresql+asyncpg://paytrack:paytrack@postgres:5432/paytrack
+  REDIS_URL: redis://redis:6379/0
+  DEBUG: "true"
+
+--- 
+apiVersion: v1
+kind: Secret
+metadata:
+  name: paytrack-secret
+  namespace: paytrack
+type: Opaque
+stringData:
+  POSTGRES_DB: paytrack
+  POSTGRES_USER: paytrack
+  POSTGRES_PASSWORD: paytrack
+  SECRET_KEY: supersecret-change-in-production
+  
