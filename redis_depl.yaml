@@ -1,15 +1,15 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: StatefulSet
 metadata:
   labels:
     app: paytrack-redis
   name: paytrack-redis
+  namespace: paytrack
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: paytrack-redis
-  strategy: {}
   template:
     metadata:
       labels:
@@ -32,12 +32,11 @@ spec:
             cpu: "1000m"
       volumes:
       - name: redisdata
-volumeClaimTemplates:
-- metadata:
-    name: redisdata
-spec:
-  accessModes: [ "ReadWriteOnce" ]
-  resources:
-    requests:
-      storage: 1Gi
-
+  volumeClaimTemplates:
+    - metadata:
+        name: redisdata
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: 1Gi

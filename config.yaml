@@ -3,9 +3,9 @@ kind: ConfigMap
 metadata:
   name: paytrack-config
   namespace: paytrack
-stringData:
-  DATABASE_URL: postgresql+asyncpg://paytrack:paytrack@postgres:5432/paytrack
-  REDIS_URL: redis://redis:6379/0
+data:
+  DATABASE_URL: postgresql+asyncpg://paytrack:paytrack@paytrack-db-srv:5432/paytrack
+  REDIS_URL: redis://redis-srv:6379/0
   DEBUG: "true"
 
 --- 
@@ -20,4 +20,3 @@ stringData:
   POSTGRES_USER: paytrack
   POSTGRES_PASSWORD: paytrack
   SECRET_KEY: supersecret-change-in-production
-  
