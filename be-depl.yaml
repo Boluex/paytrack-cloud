@@ -17,7 +17,7 @@ spec:
         app: paytrack-be
     spec:
       containers:
-      - image: boluex/paytrack-backend:7.0
+      - image: boluex/paytrack-backend:9.0
         name: paytrack-backend
         ports:
         - containerPort: 8000

@@ -17,7 +17,7 @@ spec:
         app: paytrack-fe
     spec:
       containers:
-      - image: boluex/paytrack-frontend:7.0
+      - image: boluex/paytrack-frontend:9.0
         name: paytrack-frontend
         ports:
         - containerPort: 5173
