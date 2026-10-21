@@ -10,7 +10,6 @@ spec:
   selector:
     matchLabels:
       app: paytrack-be
-  
   template:
     metadata:
       labels:
@@ -23,32 +22,34 @@ spec:
         - containerPort: 8000
         envFrom:
         - configMapRef:
-            name: paytrack-config  
+            name: paytrack-config
         env:
         - name: SECRET_KEY
           valueFrom:
             secretKeyRef:
               key: SECRET_KEY
               name: paytrack-secret
-        
-          
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: paytrack-secret
+              key: DATABASE_URL
         readinessProbe:
           httpGet:
-            path: /health
+            path: /api/health
             port: 8000
           initialDelaySeconds: 10
           periodSeconds: 5
         livenessProbe:
           httpGet:
-            path: /health
+            path: /api/health
             port: 8000
           initialDelaySeconds: 10
           periodSeconds: 5
-        resources: 
+        resources:
           requests:
-            memory: "128Mi"
-            cpu: "500m"
+            memory: 128Mi
+            cpu: 500m
           limits:
-            memory: "512Mi"
-            cpu: "1000m"
-
+            memory: 512Mi
+            cpu: 1000m

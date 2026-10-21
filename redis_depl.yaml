@@ -23,20 +23,20 @@ spec:
         volumeMounts:
         - name: redisdata
           mountPath: /data
-        resources: 
-          requests:
-            memory: "128Mi"
-            cpu: "500m"
-          limits:
-            memory: "512Mi"
-            cpu: "1000m"
-      volumes:
-      - name: redisdata
-  volumeClaimTemplates:
-    - metadata:
-        name: redisdata
-      spec:
-        accessModes: [ "ReadWriteOnce" ]
         resources:
           requests:
-            storage: 1Gi
+            memory: 128Mi
+            cpu: 500m
+          limits:
+            memory: 512Mi
+            cpu: 1000m
+  volumeClaimTemplates:
+  - metadata:
+      name: redisdata
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 1Gi
+  serviceName: redis-srv
